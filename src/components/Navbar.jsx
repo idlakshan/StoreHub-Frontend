@@ -2,7 +2,7 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <nav className="flex items-center justify-between py-8 px-16">
+    <nav className="flex items-center justify-between py-8 px-32">
         <div className="flex items-center gap-x-16">
           <a className="font-semibold text-3xl" to="/">StoreHub</a>
           <div className="flex items-center gap-x-4">
