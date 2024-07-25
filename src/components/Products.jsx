@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProductCard from './ProductCard'
 
 
@@ -78,23 +78,47 @@ const Products = () => {
         },
     ];
 
+    const categories = [
+        { id: "ALL", name: "All" },
+        { id: "1", name: "Headphones" },
+        { id: "2", name: "Earbuds" },
+        { id: "3", name: "Speakers" },
+        { id: "4", name: "Mobile Phones" },
+        { id: "5", name: "Smart Watches" },
+    ];
+
+    const [selectedCategory, setSelectedCategory] = useState("ALL");
+    const filteredProducts = selectedCategory === "ALL" ? products : products.filter((el) => el.categoryId === selectedCategory)
+
+
     return (
         <section className='px-32 py-8'>
             <h1 className='text-4xl font-semibold'>Our Top Products</h1>
             <div className='border mt-4'></div>
-            <div className='py-8 grid grid-cols-4 gap-6 mt-4'>
-                {products.map((el) => {
-                    return (
-                        <ProductCard
-                            key={el.id}
-                            image={el.image}
-                            name={el.name}
-                            price={el.price}
-                            description={el.description}
-                        />
-                    );
-                })}
+
+            <div className='py-8'>
+                <div className='flex items-center gap-x-5'>
+                    {
+                        categories.map((el) => (
+                            <button key={el.id} onClick={() => setSelectedCategory(el.id)}>{el.name}</button>
+                        ))
+                    }
+                </div>
+                <div className='py-8 grid grid-cols-4 gap-6 mt-4'>
+                    {filteredProducts.map((el) => {
+                        return (
+                            <ProductCard
+                                key={el.id}
+                                image={el.image}
+                                name={el.name}
+                                price={el.price}
+                                description={el.description}
+                            />
+                        );
+                    })}
+                </div>
             </div>
+
 
         </section>
     )
