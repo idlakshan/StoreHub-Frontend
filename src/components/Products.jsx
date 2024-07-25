@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ProductCard from './ProductCard'
+import Tab from './Tab';
 
 
 const Products = () => {
@@ -90,6 +91,9 @@ const Products = () => {
     const [selectedCategory, setSelectedCategory] = useState("ALL");
     const filteredProducts = selectedCategory === "ALL" ? products : products.filter((el) => el.categoryId === selectedCategory)
 
+    function handleTabClick(id) {
+        setSelectedCategory(id)
+    }
 
     return (
         <section className='px-32 py-8'>
@@ -100,8 +104,9 @@ const Products = () => {
                 <div className='flex items-center gap-x-5'>
                     {
                         categories.map((el) => (
-                            <button key={el.id} onClick={() => setSelectedCategory(el.id)}>{el.name}</button>
+                            <Tab key={el.id} selectedCategory={selectedCategory} category={el} handleTabClick={handleTabClick} />
                         ))
+                       
                     }
                 </div>
                 <div className='py-8 grid grid-cols-4 gap-6 mt-4'>
