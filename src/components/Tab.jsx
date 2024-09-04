@@ -9,6 +9,7 @@ const Tab = ({ selectedCategory, category, handleTabClick }) => {
 
     return (
         <button className="border border-[#edeef1] px-2 py-1 rounded-md" key={category.id} onClick={() => handleTabClick(category.id)}>{category.name}</button>
+        
     )
 }
 
