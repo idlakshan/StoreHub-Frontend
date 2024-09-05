@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from './ProductCard'
 import Tab from './Tab';
-import { getAllProducts } from '../services/api/products';
-import { getAllCategories } from '../services/api/categories';
+import { getAllProducts } from '../../../services/api/products';
+import { getAllCategories } from '../../../services/api/categories';
 
 
 const Products = () => {
