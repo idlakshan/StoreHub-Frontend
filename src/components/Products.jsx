@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ProductCard from './ProductCard'
 import Tab from './Tab';
 import { getAllProducts } from '../services/api/products';
+import { getAllCategories } from '../services/api/categories';
 
 
 const Products = () => {
@@ -80,27 +81,40 @@ const Products = () => {
     //     },
     // ];
 
-    const categories = [
-        { id: "ALL", name: "All" },
-        { id: "1", name: "Headphones" },
-        { id: "2", name: "Earbuds" },
-        { id: "3", name: "Speakers" },
-        { id: "4", name: "Mobile Phones" },
-        { id: "5", name: "Smart Watches" },
-    ];
+    // const categories = [
+    //     { id: "ALL", name: "All" },
+    //     { id: "1", name: "Headphones" },
+    //     { id: "2", name: "Earbuds" },
+    //     { id: "3", name: "Speakers" },
+    //     { id: "4", name: "Mobile Phones" },
+    //     { id: "5", name: "Smart Watches" },
+    // ];
 
-    const [products,setProducts] = useState([])
+    const [products, setProducts] = useState([])
+    const [categories, setCategories] = useState([])
 
-    useEffect(()=>{
-      getAllProducts()
-      .then((data)=>{
-        setProducts(data)
-      })
-      .catch((e)=>{
-        console.log(e);
-        
-      })
-    },[])
+    useEffect(() => {
+        getAllProducts()
+            .then((data) => {
+                console.log(data);
+                setProducts(data)
+            })
+            .catch((e) => {
+                console.log(e);
+
+            })
+
+        getAllCategories()
+            .then((data) => {
+                setCategories(data)
+            })
+            .catch((e) => {
+                console.log(e);
+
+            })
+    }, [])
+
+
 
     const [selectedCategory, setSelectedCategory] = useState("ALL");
     const filteredProducts = selectedCategory === "ALL" ? products : products.filter((el) => el.categoryId === selectedCategory)
@@ -118,16 +132,16 @@ const Products = () => {
                 <div className='flex items-center gap-x-5'>
                     {
                         categories.map((el) => (
-                            <Tab key={el.id} selectedCategory={selectedCategory} category={el} handleTabClick={handleTabClick} />
+                            <Tab key={el._id} selectedCategory={selectedCategory} category={el} handleTabClick={handleTabClick} />
                         ))
-                       
+
                     }
                 </div>
                 <div className='py-8 grid grid-cols-4 gap-6 mt-4'>
                     {filteredProducts.map((el) => {
                         return (
                             <ProductCard
-                                key={el.id}
+                                key={el._id}
                                 image={el.image}
                                 name={el.name}
                                 price={el.price}
