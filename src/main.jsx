@@ -1,18 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import HomePage from './pages/home/home.page.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import HomePage from './pages/home/home.page.jsx'
+import CartPage from './pages/cart/cart.page.jsx'
+import RootLayout from './layouts/root.layout.jsx'
+
 
 const router=createBrowserRouter([
-  {
-    path:"/",
-    element: <HomePage/>
-  },
-  {
-    path:"/cart",
-    element: <div>Cart</div>
-  }
+   {
+    element:<RootLayout/>,
+    children:[
+      {
+        path:'/',
+        element:<HomePage/>
+      },
+      {
+        path:'/cart',
+        element:<CartPage/>
+      }
+    ]
+   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

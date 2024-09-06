@@ -1,16 +1,14 @@
 
 import Hero from '../../pages/home/components/Hero'
-import Navbar from '../../components/Navbar'
 import Products from '../../pages/home/components/Products'
 
 function HomePage() {
 
   return (
-    <main>
-     <Navbar/>
-     <Hero/>
-     <Products/>
-    </main>
+    <div>
+      <Hero />
+      <Products />
+    </div>
   )
 }
 
