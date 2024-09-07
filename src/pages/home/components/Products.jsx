@@ -131,7 +131,7 @@ const Products = () => {
             <div className='py-8'>
                 <div className='flex items-center gap-x-5'>
                     {
-                        categories.map((el) => (
+                        categories.concat([{_id:"ALL",name:"ALL"}]).map((el) => (
                             <Tab key={el._id} selectedCategory={selectedCategory} category={el} handleTabClick={handleTabClick} />
                         ))
 
@@ -142,6 +142,7 @@ const Products = () => {
                         return (
                             <ProductCard
                                 key={el._id}
+                                _id={el._id}
                                 image={el.image}
                                 name={el.name}
                                 price={el.price}
