@@ -6,6 +6,7 @@ import HomePage from './pages/home/home.page.jsx'
 import CartPage from './pages/cart/cart.page.jsx'
 import RootLayout from './layouts/root.layout.jsx'
 import { CartContextProvider } from './context/CartContext.jsx'
+import CheckOut from './pages/checkout/checkout.page.jsx'
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <CartPage />
+      },
+      {
+        path: '/checkout',
+        element: <CheckOut/>
       }
     ]
   }
