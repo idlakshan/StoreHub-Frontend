@@ -7,7 +7,15 @@ import CartPage from './pages/cart/cart.page.jsx'
 import RootLayout from './layouts/root.layout.jsx'
 import { CartContextProvider } from './context/CartContext.jsx'
 import CheckOut from './pages/checkout/checkout.page.jsx'
+import { ClerkProvider } from '@clerk/clerk-react'
+import SignInPage from './pages/auth/sign-in/sign-in.page.jsx'
+import SignUpPage from './pages/auth/sign-up/sign-up.page.jsx'
 
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
 
 const router = createBrowserRouter([
   {
@@ -23,16 +31,26 @@ const router = createBrowserRouter([
       },
       {
         path: '/checkout',
-        element: <CheckOut/>
+        element: <CheckOut />
       }
     ]
+  },
+  {
+    path:'/sign-in',
+    element:<SignInPage/>
+  },
+  {
+    path:'/sign-up',
+    element:<SignUpPage/>
   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <CartContextProvider>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  </CartContextProvider>
+  <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+    <CartContextProvider>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </CartContextProvider>
+  </ClerkProvider>
 )

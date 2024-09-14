@@ -2,9 +2,20 @@ import React, { useContext, useState } from 'react'
 import TextInput from '../../components/TextInput';
 import { CartContext } from '../../context/CartContext';
 import { createOrder } from '../../services/api/orders';
+import { useUser } from '@clerk/clerk-react';
+import { Navigate } from 'react-router-dom';
 
 const CheckOut = () => {
+  const {user,isSignedIn,isLoaded}=useUser();
   const { cart } = useContext(CartContext);
+
+  if(!isLoaded){
+    return <div>Loading...</div>
+  }
+
+  if(!isSignedIn){
+    return <Navigate to={"/sign-in"}/>
+  }
 
   const [formData, setFormData] = useState({
     fname: "",
@@ -23,11 +34,19 @@ const CheckOut = () => {
     e.preventDefault();
     try {
       await createOrder({
-        userId: "123",
+        userId: user.id,  
         orderProducts: cart.map((el) => ({
           productId: el._id,
           quantity: el.count,
-        })),        
+        })), 
+        address:{
+          fname:formData.fname,
+          lname:formData.lname,
+          line_1:formData.line_1,
+          line_2:formData.line_2,
+          city:formData.city,
+          phone:formData.phone,
+        }       
       });
     } catch (error) {}
     

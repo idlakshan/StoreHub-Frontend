@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../context/CartContext'
+import { SignedIn, SignedOut, SignIn, UserButton, useUser } from '@clerk/clerk-react';
 
 
 const Navbar = () => {
   const {itemCount}=useContext(CartContext);
-  
+  const {user,isSignedIn,isLoaded}=useUser();
   return (
     <nav className="flex items-center justify-between py-8 px-32">
         <div className="flex items-center gap-x-16">
@@ -25,7 +26,21 @@ const Navbar = () => {
               </div>
             </Link>
           </div>
-          <p>Hi, Dimuthu</p>
+         <SignedIn>
+          <div className='flex items-center gap-x-4'>
+            Hi, {user?.firstName}
+          <UserButton/>
+          </div>
+            
+         </SignedIn>
+
+         <SignedOut>
+         <div className='flex items-center gap-x-4'>
+          <Link to={"/sign-in"} className='flex items-center gap-x-4 relative'>Sign in</Link>
+          <Link to={"/sign-up"} className='flex items-center gap-x-4 relative'>Sign up</Link>
+         </div>
+         </SignedOut>
+       
         </div>
       </nav>
   )
