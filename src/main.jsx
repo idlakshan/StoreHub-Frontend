@@ -10,6 +10,7 @@ import CheckOut from './pages/checkout/checkout.page.jsx'
 import { ClerkProvider } from '@clerk/clerk-react'
 import SignInPage from './pages/auth/sign-in/sign-in.page.jsx'
 import SignUpPage from './pages/auth/sign-up/sign-up.page.jsx'
+import PaymentPage from './pages/payment/payment.page.jsx'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/checkout',
         element: <CheckOut />
+      },
+      {
+        path:'/payment',
+        element:<PaymentPage/>
       }
     ]
   },
