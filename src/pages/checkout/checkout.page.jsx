@@ -7,7 +7,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 const CheckOut = () => {
   const {user,isSignedIn,isLoaded}=useUser();
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
   const navigate=useNavigate();
 
   if(!isLoaded){
@@ -49,6 +49,7 @@ const CheckOut = () => {
           phone:formData.phone,
         }       
       });
+      clearCart();
       navigate(`/payment?orderId=${order._id}`);
     } catch (error) {}
     

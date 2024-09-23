@@ -11,6 +11,7 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import SignInPage from './pages/auth/sign-in/sign-in.page.jsx'
 import SignUpPage from './pages/auth/sign-up/sign-up.page.jsx'
 import PaymentPage from './pages/payment/payment.page.jsx'
+import { Toaster } from 'sonner';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -55,6 +56,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <CartContextProvider>
       <React.StrictMode>
         <RouterProvider router={router} />
+        <Toaster richColors/>
       </React.StrictMode>
     </CartContextProvider>
   </ClerkProvider>
