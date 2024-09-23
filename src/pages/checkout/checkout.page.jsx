@@ -49,7 +49,7 @@ const CheckOut = () => {
           phone:formData.phone,
         }       
       });
-      navigate(`/payment?orderId=${order._id}`)
+      navigate(`/payment?orderId=${order._id}`);
     } catch (error) {}
     
   }
